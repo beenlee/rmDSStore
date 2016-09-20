@@ -2,7 +2,7 @@
 # @Author: dabeen
 # @Date:   2016-08-09 18:06:53
 # @Last Modified by:   dabeen
-# @Last Modified time: 2016-08-16 16:06:31
+# @Last Modified time: 2016-09-20 20:28:18
 
 #currentPath=`pwd`
 
@@ -23,7 +23,11 @@ function handlePath () {
             echo 'del '`pwd`'/.DS_Store'
             rm -rf .DS_Store
         elif [ -d $file ]; then
-            handlePath $file;
+            if [ -L $file ]; then
+                echo 'jump soft link file:'$file
+            else
+                handlePath $file;
+            fi
         fi
     done
     # echo 'out '`pwd`
